@@ -9,6 +9,12 @@
         <textarea class="form-control" name="postBody" rows="5" cols="30"></textarea>
       </div>
       <button class="btn btn-primary" type="submit" name="button">Publish</button>
+      <%for(var i=0;i<5;i++){%>
+      <input name="image" type="file">
+      <input type="text" name="image-size">
+      <input type="text" name="left">
+      <input type="text" name="border-r">
     </form>
+    <%}%>
 
 <%- include("partials/footer"); -%>

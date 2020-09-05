@@ -25,8 +25,18 @@ const postSchema = {
 
 const Post = mongoose.model("Post", postSchema);
 const userSchema = {
-  email: String,
-  password: String
+  name: {
+    type:String,
+    required: true
+  },
+  email: {
+  type:String,
+    required:true
+  },
+  password: {
+    type:String,
+    required:true
+  }
 };
 
 const User = mongoose.model("User", userSchema);
@@ -85,6 +95,53 @@ app.get("/LogIn",function(req,res){
 app.get("/sign-up",function(req,res){
   res.render("sign-up");
 });
+app.post("/sign-up",function(req,res){
+  const new_user=new User({
+      name:req.body.name,
+      email:req.body.email,
+      password:req.body.password
+  });
+  
+  new_user.save(function(err){
+    console.log("bjbhkbhj");
+    if (!err){
+        res.redirect("/LogIn");
+    }
+    else{
+      console.log(err);
+    }
+    
+  });
+});
+app.post("/LogIn",function(req,res){
+  const email=req.body.email;
+  const password=req.body.password;
+  console.log(email);
+  User.findOne({ email: email }, function(err, user) {
+    if (err){
+      console.log(err);
+    }
+    else{
+      if(user==null)
+      {
+        console.log("not found");
+      }
+      else{
+        if(user.password==password){
+          res.redirect("/");
+        }
+      }
+    }
+
+    // // test a matching password
+    // user.comparePassword(password, function(err, isMatch) {
+    //     if (err) throw err;
+    //     console.log(password, isMatch); // -> Password123: true
+    });
+
+    // test a failing password
+});
+
 app.listen(3000, function() {
   console.log("Server started on port 3000");
 });
