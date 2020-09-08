@@ -1,9 +1,12 @@
 
 <%- include("partials/header"); -%>
 
-<h1 style="background-color: darksalmon; padding: 20px; border-radius: 10px;" ><%=title%></h1>
+<h1 style="background-color: darksalmon; padding: 20px; border-radius: 10px; border:solid" ><%=title%></h1>
     <div class="post">
     <p><%=content%></p>
+    <img src="data:image/<%=image.contentType%>;base64, 
+           <%=image.data.toString('base64')%>" alt="uigggui">
+    
 </div>
 
 

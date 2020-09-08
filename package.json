@@ -10,9 +10,15 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "dotenv": "^8.2.0",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
-    "lodash": "^4.17.11",
-    "mongoose": "^5.3.6"
+    "fs": "0.0.1-security",
+    "lodash": "^4.17.20",
+    "mongoose": "^5.10.3",
+    "multer": "^1.4.2"
+  },
+  "devDependencies": {
+    "node-dev": "^3.0.0"
   }
 }
