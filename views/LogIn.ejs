@@ -1,22 +1,39 @@
 <%- include("partials/header"); -%>
 <form class="form-signin" method="post" action="/LogIn">
-<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-<label for="inputEmail" class="sr-only">Email address</label>
-<input type="email" name="email" style="margin-bottom: 10px; " id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-<label for="inputPassword" class="sr-only">Password</label>
-<input type="password" name="password" style="margin-bottom: 10px; " id="inputPassword" class="form-control" placeholder="Password" required>
-<div class="checkbox mb-3">
-  <label>
-    <input type="checkbox" value="remember-me"> Remember me
-  </label>
-</div>
-<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-<p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+  <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+  <label for="inputEmail" class="sr-only">Email address</label>
+  <input
+    type="email"
+    name="email"
+    style="margin-bottom: 10px"
+    id="inputEmail"
+    class="form-control"
+    placeholder="Email address"
+    required
+    autofocus
+  />
+  <label for="inputPassword" class="sr-only">Password</label>
+  <input
+    type="password"
+    name="password"
+    style="margin-bottom: 10px"
+    id="inputPassword"
+    class="form-control"
+    placeholder="Password"
+    required
+  />
+  <div class="checkbox mb-3">
+    <label> <input type="checkbox" value="remember-me" /> Remember me </label>
+  </div>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">
+    Sign in
+  </button>
+  <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
 </form>
-<h1 style="margin-left: 540px;">Or</h1>
+<h1 style="margin-left: 820px">Or</h1>
 <form action="/sign-up" class="form-signin">
-    <a href="/sign-up">
-    <button class="btn btn-lg btn-primary btn-block"> Sign Up</button>
-</a>
+  <a href="/sign-up">
+    <button class="btn btn-lg btn-primary btn-block">Sign Up</button>
+  </a>
 </form>
 <%- include("partials/footer"); -%>

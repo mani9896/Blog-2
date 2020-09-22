@@ -1,14 +1,42 @@
 <%- include("partials/header"); -%>
 
 <form class="form-signin" method="post" action="/sign-up">
-<h1 class="h3 mb-3 font-weight-normal">Sign UP</h1>
-<label for="inputEmail" class="sr-only">Name</label>
-<input type="name" name="name" style="margin-bottom: 10px; " id="inputName" class="form-control" placeholder="Name" required autofocus>
-<label for="inputEmail"  class="sr-only">Email address</label>
-<input type="email" name="email" style="margin-bottom: 10px; " id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-<label for="inputPassword" class="sr-only">Password</label>
-<input type="password" name="password" style="margin-bottom: 10px; " id="inputPassword" class="form-control" placeholder="Password" required>
+  <h1 class="h3 mb-3 font-weight-normal">Sign UP</h1>
+  <label for="inputEmail" class="sr-only">Name</label>
+  <input
+    type="name"
+    name="name"
+    style="margin-bottom: 10px"
+    id="inputName"
+    class="form-control"
+    placeholder="Name"
+    required
+    autofocus
+  />
+  <label for="inputEmail" class="sr-only">Email address</label>
+  <input
+    type="email"
+    name="email"
+    style="margin-bottom: 10px"
+    id="inputEmail"
+    class="form-control"
+    placeholder="Email address"
+    required
+    autofocus
+  />
+  <label for="inputPassword" class="sr-only">Password</label>
+  <input
+    type="password"
+    name="password"
+    style="margin-bottom: 10px"
+    id="inputPassword"
+    class="form-control"
+    placeholder="Password"
+    required
+  />
 
-<button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">
+    Sign Up
+  </button>
 </form>
 <%- include("partials/footer"); -%>
