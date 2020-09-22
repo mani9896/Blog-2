@@ -14,9 +14,14 @@
   <div class="card2" style="align-self: center">
     <a href="/posts/<%=post._id%>" style="text-decoration: none">
       <div class="imgBx2">
-        <h1 style="word-wrap: break-word; color: black; font-size: 200%">
+        <!-- <h1 style="word-wrap: break-word; color: black; font-size: 200%">
           <%=post.title%>
-        </h1>
+        </h1> -->
+        <img
+          src="data:image/<%=post.img.contentType%>;base64, 
+           <%=post.img.data.toString('base64')%>"
+          alt="uigggui"
+        />
       </div>
 
       <div class="details2">
@@ -24,11 +29,14 @@
           <%=post.content.substring(0, 100) + " ..."%>
           <label for="blog">by <%=post.name%></label>
         </p>
-        <img
+        <h1 style="word-wrap: break-word; color: black; font-size: 200%">
+          <%=post.title%>
+        </h1>
+        <!-- <img
           src="data:image/<%=post.img.contentType%>;base64, 
            <%=post.img.data.toString('base64')%>"
           alt="uigggui"
-        />
+        /> -->
       </div>
     </a>
   </div>

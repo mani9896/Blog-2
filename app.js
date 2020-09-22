@@ -26,10 +26,8 @@ mongoose.connect("mongodb://localhost:27017/blogDB", { useNewUrlParser: true });
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "uploads");
-    console.log("kjbjhbjh");
   },
   filename: (req, file, cb) => {
-    console.log("kjbjhbjh");
     cb(null, file.fieldname + "-" + Date.now());
   },
 });
@@ -142,7 +140,6 @@ app.post("/sign-up", function (req, res) {
   });
 
   new_user.save(function (err) {
-    console.log("bjbhkbhj");
     if (!err) {
       res.redirect("/LogIn");
     } else {
@@ -153,18 +150,17 @@ app.post("/sign-up", function (req, res) {
 app.post("/LogIn", function (req, res) {
   const email = req.body.email;
   const password = req.body.password;
-  console.log(email);
   User.findOne({ email: email }, function (err, user) {
     if (err) {
       console.log(err);
+      res.redirect("/");
     } else {
       if (user == null) {
-        console.log("not found");
+        res.redirect("/");
       } else {
         if (user.password == password) {
           isLogged = true;
           userName = user.name;
-          console.log(userName);
           res.redirect("/compose");
         } else {
           res.redirect("/LogIn");
