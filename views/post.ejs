@@ -12,10 +12,12 @@
 </h1>
 <div class="post">
   <p><%=content%></p>
+
   <img
     src="data:image/<%=image.contentType%>;base64, 
            <%=image.data.toString('base64')%>"
     alt="uigggui"
+    style="width: <%=width%>; height: <%=height%>"
   />
 </div>
 

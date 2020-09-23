@@ -13,7 +13,7 @@
     ></textarea>
   </div>
   <button class="btn btn-primary" type="submit" name="button">Publish</button>
-  <input type="file" id="image" name="image" value="" />
+
   <!-- <%for(var i=0;i<5;i++){%>
       <input name="image" type="file">
       <input type="text" name="image-size">
@@ -22,5 +22,17 @@
     </form>
     <%}%> -->
 
-  <%- include("partials/footer"); -%>
+  <div class="images">
+    <div class="img">
+      <input type="text" name="height" />
+      <input type="text" name="width" />
+      <input type="file" id="image" name="image" value="" />
+    </div>
+  </div>
 </form>
+<form action="" id="compose">
+  <button id="addImage">Add Image</button>
+</form>
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/main.js"></script>
+<%- include("partials/footer"); -%>

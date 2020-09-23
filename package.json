@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "dotenv": "^8.2.0",
     "ejs": "^2.6.1",
@@ -16,7 +17,8 @@
     "fs": "0.0.1-security",
     "lodash": "^4.17.20",
     "mongoose": "^5.10.3",
-    "multer": "^1.4.2"
+    "multer": "^1.4.2",
+    "socket.io": "^2.3.0"
   },
   "devDependencies": {
     "node-dev": "^3.0.0"
