@@ -10,6 +10,7 @@ const path = require("path");
 const multer = require("multer");
 const socketio = require("socket.io");
 const bcrypt = require("bcryptjs");
+const postSchema = require("./schema/post");
 require("dotenv/config");
 const homeStartingContent =
   "Lacus vel facilisis volutpat est velit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit amet cursus sit amet dictum sit amet justo. Viverra tellus in hac habitasse. Imperdiet proin fermentum leo vel orci porta. Donec ultrices tincidunt arcu non sodales neque sodales ut. Mattis molestie a iaculis at erat pellentesque adipiscing. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at. Odio euismod lacinia at quis risus sed vulputate odio ut. Cursus mattis molestie a iaculis at erat pellentesque adipiscing.";
@@ -25,8 +26,12 @@ app.set("view engine", "ejs");
 var userName = "";
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+const userSchema = require("./schema/user");
 
-mongoose.connect("mongodb://localhost:27017/blogDB", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost:27017/blogDB", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -39,33 +44,7 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
-const postSchema = {
-  name: String,
-  title: String,
-  content: String,
-  img: {
-    data: Buffer,
-    contentType: String,
-  },
-  height: String,
-  width: String,
-};
-
 const Post = mongoose.model("Post", postSchema);
-const userSchema = {
-  name: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-};
 
 const User = mongoose.model("User", userSchema);
 
@@ -181,14 +160,7 @@ app.post("/LogIn", function (req, res) {
         }
       }
     }
-
-    // // test a matching password
-    // user.comparePassword(password, function(err, isMatch) {
-    //     if (err) throw err;
-    //     console.log(password, isMatch); // -> Password123: true
   });
-
-  // test a failing password
 });
 io.on("connection", function (socket) {
   socket.on("add", function () {
@@ -196,9 +168,7 @@ io.on("connection", function (socket) {
   });
   console.log("Connected socket");
 });
-// app.listen(3000, function () {
-//   console.log("Server started on port 3000");
-// });
+
 server.listen(3000, function (req, res) {
   console.log("running");
 });
