@@ -11,6 +11,7 @@ const multer = require("multer");
 const socketio = require("socket.io");
 const bcrypt = require("bcryptjs");
 const postSchema = require("./schema/post");
+const session = require("express-session");
 require("dotenv/config");
 const homeStartingContent =
   "Lacus vel facilisis volutpat est velit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit amet cursus sit amet dictum sit amet justo. Viverra tellus in hac habitasse. Imperdiet proin fermentum leo vel orci porta. Donec ultrices tincidunt arcu non sodales neque sodales ut. Mattis molestie a iaculis at erat pellentesque adipiscing. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at. Odio euismod lacinia at quis risus sed vulputate odio ut. Cursus mattis molestie a iaculis at erat pellentesque adipiscing.";
@@ -32,7 +33,13 @@ mongoose.connect("mongodb://localhost:27017/blogDB", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-
+app.use(
+  session({
+    secret: "2C44-4D44-WppQ38S",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "uploads");
@@ -41,7 +48,10 @@ var storage = multer.diskStorage({
     cb(null, file.fieldname + "-" + Date.now());
   },
 });
-
+var auth = function (req, res, next) {
+  if (req.session.admin) return next();
+  else return res.render("Login", { isLogged: isLogged });
+};
 var upload = multer({ storage: storage });
 
 const Post = mongoose.model("Post", postSchema);
@@ -58,12 +68,8 @@ app.get("/", function (req, res) {
   });
 });
 
-app.get("/compose", function (req, res) {
-  if (isLogged) {
-    res.render("compose", { isLogged: isLogged });
-  } else {
-    res.render("LogIn", { isLogged: isLogged });
-  }
+app.get("/compose", auth, function (req, res) {
+  res.render("compose", { isLogged: isLogged });
 });
 app.post("/compose", upload.single("image"), (req, res, next) => {
   var obj = {
@@ -79,6 +85,7 @@ app.post("/compose", upload.single("image"), (req, res, next) => {
     width: req.body.width + "px",
     height: req.body.height + "px",
   };
+
   Post.create(obj, (err, item) => {
     if (err) {
       console.log(err);
@@ -113,10 +120,13 @@ app.get("/contact", function (req, res) {
   res.render("contact", { contactContent: contactContent, isLogged: isLogged });
 });
 app.get("/LogIn", function (req, res) {
+  console.log(isLogged);
+  console.log(req.session.admin);
   res.render("LogIn", { isLogged: isLogged });
 });
 app.get("/LogOut", function (req, res) {
   isLogged = false;
+  req.session.destroy();
   res.redirect("/");
 });
 app.get("/sign-up", function (req, res) {
@@ -154,6 +164,8 @@ app.post("/LogIn", function (req, res) {
         if (isMatch) {
           isLogged = true;
           userName = user.name;
+          req.session.user = userName;
+          req.session.admin = true;
           res.redirect("/compose");
         } else {
           res.redirect("/LogIn");
